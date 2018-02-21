@@ -1,11 +1,9 @@
 package task70;
 
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class task70Test {
     private static task70 test = new task70();
@@ -17,7 +15,8 @@ public class task70Test {
 
     @Test
     public void readDataFromFile() throws IOException {
-        ArrayList<String> someList = test.readDataFromFile();
+        ArrayList<String> someList = test.readDataFromFile("C:\\task70\\task70\\input.txt");
+        Assert.assertNotNull(someList);
     }
 
     @Test
