@@ -12,7 +12,7 @@ public class task70 {
     private static final String OUTPUT_FILE_PATH = "output.txt";
 
     public static void main(String[] args) throws IOException {
-        writeDataToFile(calculating(readDataFromFile()));
+        writeDataToFile(calculating(readDataFromFile("")));
     }
 
     public static void writeDataToFile(String calculating) {
@@ -23,14 +23,17 @@ public class task70 {
         }
     }
 
-    public static ArrayList<String> readDataFromFile() throws IOException {
-        ArrayList<String> arrayOfLine = new ArrayList<>();
-        String buffLine;
-        BufferedReader readerBuff = new BufferedReader(new FileReader(INPUT_FILE_PATH));
-        while ((buffLine = readerBuff.readLine()) != null){
-            arrayOfLine.add(buffLine);
+    public static ArrayList<String> readDataFromFile(String path) throws IOException {
+        if (path.isEmpty()){
+            path = INPUT_FILE_PATH;
         }
-        return arrayOfLine;
+            ArrayList<String> arrayOfLine = new ArrayList<>();
+            String buffLine;
+            BufferedReader readerBuff = new BufferedReader(new FileReader(path));
+            while ((buffLine = readerBuff.readLine()) != null) {
+                arrayOfLine.add(buffLine);
+            }
+            return arrayOfLine;
     }
 
     public static String calculating(ArrayList<String> data) {
@@ -46,18 +49,10 @@ public class task70 {
             for (int i = 0; i < line.length() / (-power); i++) {
                 buffLine += line.toCharArray()[i];
             }
-//            String secBuff = "";
-//            for (int i = 0; i < (-power); i++) {
-//                secBuff += buffLine;
-//            }
-//
-//            if (!(secBuff.equals(line))){
-//                return  "NO SOLUTION";
-//            }
             Pattern pattern = Pattern.compile("(" + buffLine + ")+");
             Matcher match = pattern.matcher(line);
             if (!match.matches()) {
-                buffLine = "";
+                return "NO SOLUTION";
             }
         }
         if (buffLine.length()>1023){
